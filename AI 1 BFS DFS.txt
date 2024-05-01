@@ -1,0 +1,57 @@
+#BFS Traversal
+from collections import deque
+
+def bfs(graph, start):
+    visited = set()
+    queue = deque([start])
+    visited.add(start)
+    
+    while queue:
+        vertex = queue.popleft()
+        print(vertex, end=" ")
+        
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+
+# Graph representing numbers 0 to 3
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: [3]
+}
+
+print("BFS Traversal:")
+bfs(graph, 0)
+
+===Output===
+BFS Traversal:
+2 0 3 1
+
+#DFS Traversal
+def dfs(graph, start, visited=None):
+    if visited is None:
+        visited = set()
+    visited.add(start)
+    print(start, end=" ")
+
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            dfs(graph, neighbor, visited)
+
+# Graph representing numbers 0 to 3
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [0, 3],
+    3: [3]
+}
+
+print("DFS Traversal:")
+dfs(graph, 2)
+
+===Output===
+DFS Traversal:
+2 0 1 3 
